@@ -1,0 +1,78 @@
+import { Formik, Form } from "formik";
+import CryptoJS from "crypto-js";
+import { Input } from "./Ui/Input";
+import { Button } from "./Ui/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../Redux/userSlice";
+import { createValidationSchema } from "../utils/form-validators/changePasswordValidator";
+import { User } from "../types/userType";
+
+const ChangePassword = () => {
+  const dispatch = useDispatch();
+  const users = useSelector((state: any) => state.user.users);
+  const user = useSelector((state: any) => state.user.user);
+
+  const encryptPassword = (password: string): string => {
+    return CryptoJS.SHA256(password).toString();
+  };
+
+  const validationSchema = createValidationSchema();
+
+  const handleSubmit = (values: any) => {
+    const encryptedPassword = encryptPassword(values.password);
+
+    const newUser: User = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      mobileNumber: values.mobileNumber,
+      password: encryptedPassword,
+    };
+
+    dispatch(signup(newUser));
+    alert("User signed up successfully!");
+  };
+
+  return (
+    <div className="max-w-lg mx-auto p-8 bg-white rounded-lg border">
+      <h2 className="text-2xl font-semibold text-center mb-6">
+        Change Password
+      </h2>
+      <Formik
+        initialValues={{
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form>
+          <Input
+            name="currentPassword"
+            id="currentPassword"
+            lable="currentPassword"
+            type="password"
+          />
+
+          <Input
+            name="newPassword"
+            id="newPassword"
+            lable="New Password"
+            type="password"
+          />
+          <Input
+            name="confirmPassword"
+            id="confirmPassword"
+            lable="Confirm Password"
+            type="password"
+          />
+
+          <Button type="submit" width="fit-content" text="Submit" />
+        </Form>
+      </Formik>
+    </div>
+  );
+};
+
+export default ChangePassword;
