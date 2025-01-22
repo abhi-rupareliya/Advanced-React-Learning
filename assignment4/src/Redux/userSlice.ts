@@ -45,6 +45,7 @@ const userSlice = createSlice({
     },
 
     changePassword: (state, action: PayloadAction<string>) => {
+      console.log("before",state.users)
       if (state.user) {
         state.user.password = action.payload;
         const updatedUsers = state.users.map((user) =>
@@ -52,6 +53,7 @@ const userSlice = createSlice({
             ? { ...user, password: action.payload }
             : user
         );
+        console.log("after",updatedUsers)
         state.users = updatedUsers;
         localStorage.setItem("users", JSON.stringify(updatedUsers));
         localStorage.setItem("user", JSON.stringify(state.user));

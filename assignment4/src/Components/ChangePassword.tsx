@@ -3,34 +3,39 @@ import CryptoJS from "crypto-js";
 import { Input } from "./Ui/Input";
 import { Button } from "./Ui/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../Redux/userSlice";
+import { changePassword } from "../Redux/userSlice";
 import { createValidationSchema } from "../utils/form-validators/changePasswordValidator";
-import { User } from "../types/userType";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ChangePassword = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const users = useSelector((state: any) => state.user.users);
   const user = useSelector((state: any) => state.user.user);
 
   const encryptPassword = (password: string): string => {
     return CryptoJS.SHA256(password).toString();
   };
 
+  useEffect(() => {
+    if (!user) {
+      alert("Login to continue");
+      navigate("/auth/login");
+    }
+  }, [user, navigate]);
+
   const validationSchema = createValidationSchema();
 
   const handleSubmit = (values: any) => {
-    const encryptedPassword = encryptPassword(values.password);
+    const { currentPassword, newPassword } = values;
 
-    const newUser: User = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      mobileNumber: values.mobileNumber,
-      password: encryptedPassword,
-    };
+    if (encryptPassword(currentPassword) !== user.password) {
+      alert("Incorrect credentials");
+      return;
+    }
 
-    dispatch(signup(newUser));
-    alert("User signed up successfully!");
+    dispatch(changePassword(encryptPassword(newPassword)));
+    alert("Password Changed successfully!");
   };
 
   return (
