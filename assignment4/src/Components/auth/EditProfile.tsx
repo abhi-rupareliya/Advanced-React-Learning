@@ -1,24 +1,18 @@
 import { Formik, Form } from "formik";
-import { Input } from "./Ui/Input";
-import { Button } from "./Ui/Button";
+import { Input } from "../Ui/Input";
+import { Button } from "../Ui/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { createValidationSchema } from "../utils/form-validators/editProfileValidator";
-import { editProfile } from "../Redux/userSlice";
+import { createValidationSchema } from "../../utils/form-validators/editProfileValidator";
+import { editProfile } from "../../Redux/userSlice";
+import { StateType } from "../../types/storeType";
+import { EditProfileFormType } from "../../types/FormDataTypes";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const EditProfile = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const users = useSelector((state: any) => state.user.users);
-  const user = useSelector((state: any) => state.user.user);
-
-  useEffect(() => {
-    if (!user) {
-      alert("Login to continue");
-      navigate("/auth/login");
-    }
-  }, [user, navigate]);
+  const navigate = useNavigate();
+  const users = useSelector((state: StateType) => state.user.users);
+  const user = useSelector((state: StateType) => state.user.user);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -26,8 +20,9 @@ const EditProfile = () => {
 
   const validationSchema = createValidationSchema(users, user.email);
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: EditProfileFormType) => {
     dispatch(editProfile({ ...user, ...values }));
+    navigate("/", { replace: true });
   };
 
   return (
@@ -62,7 +57,7 @@ const EditProfile = () => {
             type="text"
           />
 
-          <Button type="submit" width="fit-content" text="Submit" />
+          <Button type="submit" width="full" text="Save Changes" />
         </Form>
       </Formik>
     </div>

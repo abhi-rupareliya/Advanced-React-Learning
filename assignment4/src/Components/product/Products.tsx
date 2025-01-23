@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ProductCard from "./ProductCard";
-import { Product } from "../types/productType";
+import { Product } from "../../types/productType";
+import Loading from "../Ui/Loading";
 
 
 
@@ -34,6 +35,8 @@ const Products = () => {
   const handlePageClick = ({ selected }: { selected: number }) => {
     setParams({ skip: (selected * limit).toString(), limit: limit.toString() });
   };
+
+  if(!products.length) return <Loading/>
 
   return (
     <div className="max-w-full mx-auto">

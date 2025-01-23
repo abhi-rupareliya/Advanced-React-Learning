@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../Redux/userSlice";
+import { logout } from "../../Redux/userSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -16,10 +16,10 @@ const Navbar = () => {
         <div className=" text-2xl font-bold">Products</div>
 
         <div className={` space-x-6 items-center flex`}>
-          <Link to={"/"}>Home</Link>
-          <Link to={"/products"}>Products</Link>
-          <Link to={"/edit-profile"}>Profile</Link>
-          <Link to={"/change-password"}>change password</Link>
+          <Link to={"/"} replace={true}>Home</Link>
+          <Link to={"/products"} replace={true}>Products</Link>
+          <Link to={"/edit-profile"} replace={true}>Profile</Link>
+          <Link to={"/change-password"} replace={true}>change password</Link>
           <p onClick={handleLogout}>Log Out</p>
         </div>
       </div>

@@ -40,12 +40,14 @@ const userSlice = createSlice({
       const updatedUsers = state.users.map((user) =>
         user.email === state.user?.email ? action.payload : user
       );
+      state.user = action.payload;
+      state.users = updatedUsers;
       localStorage.setItem("users", JSON.stringify(updatedUsers));
       localStorage.setItem("user", JSON.stringify(action.payload));
     },
 
     changePassword: (state, action: PayloadAction<string>) => {
-      console.log("before",state.users)
+      console.log("before", state.users);
       if (state.user) {
         state.user.password = action.payload;
         const updatedUsers = state.users.map((user) =>
@@ -53,7 +55,7 @@ const userSlice = createSlice({
             ? { ...user, password: action.payload }
             : user
         );
-        console.log("after",updatedUsers)
+        console.log("after", updatedUsers);
         state.users = updatedUsers;
         localStorage.setItem("users", JSON.stringify(updatedUsers));
         localStorage.setItem("user", JSON.stringify(state.user));
@@ -62,5 +64,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { login, signup, logout, changePassword ,editProfile} = userSlice.actions;
+export const { login, signup, logout, changePassword, editProfile } =
+  userSlice.actions;
 export default userSlice.reducer;

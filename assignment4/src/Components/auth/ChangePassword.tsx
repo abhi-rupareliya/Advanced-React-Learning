@@ -1,17 +1,19 @@
 import { Formik, Form } from "formik";
 import CryptoJS from "crypto-js";
-import { Input } from "./Ui/Input";
-import { Button } from "./Ui/Button";
+import { Input } from "../Ui/Input";
+import { Button } from "../Ui/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { changePassword } from "../Redux/userSlice";
-import { createValidationSchema } from "../utils/form-validators/changePasswordValidator";
+import { changePassword } from "../../Redux/userSlice";
+import { createValidationSchema } from "../../utils/form-validators/changePasswordValidator";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { StateType } from "../../types/storeType";
+import { ChangePasswordFormType } from "../../types/FormDataTypes";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector((state: StateType) => state.user.user);
 
   const encryptPassword = (password: string): string => {
     return CryptoJS.SHA256(password).toString();
@@ -26,7 +28,7 @@ const ChangePassword = () => {
 
   const validationSchema = createValidationSchema();
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: ChangePasswordFormType) => {
     const { currentPassword, newPassword } = values;
 
     if (encryptPassword(currentPassword) !== user.password) {

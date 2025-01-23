@@ -1,29 +1,32 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Login from "./Components/Login";
-import Signup from "./Components/SignUp";
-import EditProfile from "./Components/EditProfile";
-import ChangePassword from "./Components/ChangePassword";
-import Navbar from "./Components/Navbar2";
-import Products from "./Components/Products";
-import Product from "./Components/ProductDetails";
+import EditProfile from "./Components/auth/EditProfile";
+import ChangePassword from "./Components/auth/ChangePassword";
+import Products from "./Components/product/Products";
+import Product from "./Components/product/ProductDetails";
+import Login from "./Components/auth/Login";
+import Signup from "./Components/auth/SignUp";
+import PrivateRoutes from "./Components/auth/PrivateRoutes";
+import Home from "./Components/Home";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+
         <Routes>
           <Route path="/auth">
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
           </Route>
 
-          <Route path="/" element={<Login />} />
-          <Route path="/edit-profile" element={<EditProfile />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:id" element={<Product/>} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/product/:id" element={<Product />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
