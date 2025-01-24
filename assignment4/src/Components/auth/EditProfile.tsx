@@ -8,6 +8,7 @@ import { StateType } from "../../types/storeType";
 import { EditProfileFormType } from "../../types/FormDataTypes";
 import { useNavigate } from "react-router-dom";
 import styles from "./auth.module.scss";
+import toast from "react-hot-toast";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -15,14 +16,11 @@ const EditProfile = () => {
   const users = useSelector((state: StateType) => state.user.users);
   const user = useSelector((state: StateType) => state.user.user);
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
   const validationSchema = createValidationSchema(users, user.email);
 
   const handleSubmit = (values: EditProfileFormType) => {
     dispatch(editProfile({ ...user, ...values }));
+    toast.success("profile updated successfully")
     navigate("/", { replace: true });
   };
 

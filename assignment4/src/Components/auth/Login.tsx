@@ -10,6 +10,7 @@ import { StateType } from "../../types/storeType";
 import { LoginFormType } from "../../types/FormDataTypes";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./auth.module.scss";
+import toast from "react-hot-toast";
 
 function Login() {
   const dispatch = useDispatch();
@@ -28,11 +29,11 @@ function Login() {
     });
 
     if (userExists.length > 0) {
-      alert("Login Successful");
+      toast.success("Logged in successfully.");
       dispatch(login(userExists[0]));
       navigate("/", { replace: true });
     } else {
-      alert("Invalid Credentials");
+      toast.error("Invalid credentials.");
     }
   };
 
@@ -61,11 +62,7 @@ function Login() {
           </Form>
         </Formik>
         <div className={styles.linkContainer}>
-          <Link
-            className={styles.link}
-            replace={true}
-            to="/auth/signup"
-          >
+          <Link className={styles.link} replace={true} to="/auth/signup">
             Not a user? Create an account to continue
           </Link>
         </div>

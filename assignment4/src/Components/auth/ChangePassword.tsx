@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { StateType } from "../../types/storeType";
 import { ChangePasswordFormType } from "../../types/FormDataTypes";
 import styles from "./auth.module.scss";
+import toast from "react-hot-toast";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const ChangePassword = () => {
 
   useEffect(() => {
     if (!user) {
-      alert("Login to continue");
+      toast.error("Login to continue");
       navigate("/auth/login");
     }
   }, [user, navigate]);
@@ -33,12 +34,12 @@ const ChangePassword = () => {
     const { currentPassword, newPassword } = values;
 
     if (encryptPassword(currentPassword) !== user.password) {
-      alert("Incorrect credentials");
+      toast.error("Incorrect credentials");
       return;
     }
 
     dispatch(changePassword(encryptPassword(newPassword)));
-    alert("Password Changed successfully!");
+    toast.success("Password Changed successfully!");
   };
 
   return (

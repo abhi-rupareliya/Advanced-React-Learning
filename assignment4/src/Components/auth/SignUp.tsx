@@ -8,11 +8,13 @@ import { createValidationSchema } from "../../utils/form-validators/signupValida
 import { User } from "../../types/userType";
 import { SignupFormType } from "../../types/FormDataTypes";
 import { StateType } from "../../types/storeType";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./auth.module.scss";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const users = useSelector((state: StateType) => state.user.users);
 
   const encryptPassword = (password: string): string => {
@@ -33,7 +35,8 @@ const Signup = () => {
     };
 
     dispatch(signup(newUser));
-    alert("User signed up successfully!");
+    toast.success("acccount created successfully!");
+    navigate("/", { replace: true });
   };
 
   return (
@@ -92,11 +95,7 @@ const Signup = () => {
           </Form>
         </Formik>
         <div className={styles.linkContainer}>
-          <Link
-            className={styles.link}
-            replace={true}
-            to="/auth/login"
-          >
+          <Link className={styles.link} replace={true} to="/auth/login">
             already a user? login to continue
           </Link>
         </div>

@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import EditProfile from "./Components/auth/EditProfile";
 import ChangePassword from "./Components/auth/ChangePassword";
 import Products from "./Components/product/Products";
@@ -8,12 +7,13 @@ import Login from "./Components/auth/Login";
 import Signup from "./Components/auth/SignUp";
 import PrivateRoutes from "./Components/auth/PrivateRoutes";
 import Home from "./Components/Home";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-
+        <Toaster position="top-center" />
         <Routes>
           <Route path="/auth">
             <Route path="login" element={<Login />} />
