@@ -1,26 +1,44 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../Redux/userSlice";
-
+import styles from "./ui.module.scss";
 const Navbar = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/',{replace : true})
+    navigate("/", { replace: true });
   };
 
   return (
-    <nav className="bg-slate-50 p-4 shadow-sm">
-      <div className="max-w-screen-xl mx-auto flex justify-between items-center">
-        <div className=" text-2xl font-bold">Products</div>
+    <nav className={styles.navbar}>
+      <div className={styles.navbar_container}>
+        <div className={styles.navbar_title}>Products</div>
 
-        <div className={` space-x-6 items-center flex`}>
-          <Link to={"/"} replace={true}>Home</Link>
-          <Link to={"/products"} replace={true}>Products</Link>
-          <Link to={"/edit-profile"} replace={true}>Profile</Link>
-          <Link to={"/change-password"} replace={true}>change password</Link>
-          <p onClick={handleLogout}>Log Out</p>
+        <div className={styles.navbar_links}>
+          <Link to={"/"} className={styles.links} replace={true}>
+            Home
+          </Link>
+          <Link to={"/products"} className={styles.navbar_links} replace={true}>
+            Products
+          </Link>
+          <Link
+            to={"/edit-profile"}
+            className={styles.navbar_links}
+            replace={true}
+          >
+            Profile
+          </Link>
+          <Link
+            to={"/change-password"}
+            className={styles.navbar_links}
+            replace={true}
+          >
+            change password
+          </Link>
+          <p onClick={handleLogout} className={styles.navbar_logout}>
+            Log Out
+          </p>
         </div>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import styles from "./ui.module.scss";
 type Props = {
   src: string;
   alt: string;
@@ -17,17 +17,11 @@ const Image = ({ src, alt, onClick }: Props) => {
 
   return (
     <>
-      {!isLoaded && (
-        <div
-          className={`bg-gray-100 w-64 h-64 animate-pulse rounded-lg shadow-sm mx-auto`}
-        />
-      )}
+      {!isLoaded && <div className={styles.image_skeleton} />}
       <img
         src={src}
         alt={alt}
-        className={`w-64 h-64 object-cover rounded-lg shadow-sm mx-auto ${
-          isLoaded ? "block" : "hidden"
-        }`}
+        className={isLoaded ? styles.image_block : styles.image_hidden}
         onLoad={handleImageLoad}
         onClick={onClick ? (e) => onClick(e) : undefined}
       />

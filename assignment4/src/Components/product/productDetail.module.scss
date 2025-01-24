@@ -1,0 +1,242 @@
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+$yellow-400: #facc15;
+$gray-900 :#111827;
+$gray-300: #d1d5db;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$green-600: #16a34a;
+$red-500: #ef4444;
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem;
+
+    @media (min-width: 640px) {
+        max-width: 640px;
+    }
+
+    @media (min-width: 768px) {
+        max-width: 768px;
+    }
+
+    @media (min-width: 1024px) {
+        max-width: 1024px;
+    }
+
+    @media (min-width: 1280px) {
+        max-width: 1280px;
+    }
+
+    @media (min-width: 1536px) {
+        max-width: 1536px;
+    }
+}
+
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    @media (min-width: 1024px) {
+        flex-direction: row;
+    }
+}
+
+.thumbnail {
+    border-radius: 0.5rem;
+    box-shadow: $shadow-lg;
+    width: 50%;
+    height: 50%;
+
+    &_container {
+        width: 100%;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: center;
+
+        @media (min-width: 1024px) {
+            width: 50%;
+            margin-bottom: 0px;
+        }
+    }
+}
+
+.heroDetailsContainer {
+    width: 100%;
+
+    @media (min-width: 1024px) {
+        width: 50%;
+    }
+
+    .title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        font-weight: 600;
+        color: $gray-900;
+    }
+
+
+    .category {
+        margin-top: 0.5rem;
+        color: $gray-600;
+    }
+
+    .description {
+        margin-top: 1rem;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+
+    .amount {
+        margin-top: 1.5rem;
+
+        .price {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 600;
+            color: $green-600;
+        }
+
+        .discountedPrice {
+            margin-left: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            text-decoration-line: line-through;
+            color: $gray-500;
+        }
+
+        .discount {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            margin-left: 0.5rem;
+            color: $red-500;
+        }
+    }
+
+    .meta {
+        margin-top: 0.5rem;
+        color: $gray-600;
+    }
+
+    .rating {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+
+        .star {
+            color: $yellow-400;
+        }
+
+        .number {
+            margin-left: 0.5rem;
+            color: $gray-500;
+        }
+    }
+}
+
+.images {
+    margin-top: 2.5rem;
+
+    .heading {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 600;
+        color: $gray-900;
+    }
+
+    .container {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        gap: 5rem;
+        margin: 0 auto;
+    }
+}
+
+.details {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2rem;
+
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+
+    .heading {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+        color: $gray-900;
+    }
+
+    .info {
+        margin-top: 0.5rem;
+        color: $gray-600;
+    }
+}
+
+.reviews {
+    margin-top: 2.5rem;
+
+    .heading {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 600;
+        color: $gray-600;
+    }
+
+    .reviewContainer {
+        margin-top: 1rem;
+
+        &>* {
+            margin-top: 1.5rem;
+        }
+
+        &>*:first-child {
+            margin-top: 0;
+        }
+
+        .review {
+
+            padding: 1rem;
+            border: 1px solid $gray-300 ;
+            border-radius: 0.5rem;
+
+            .rating {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .customer {
+                    font-weight: 600;
+                }
+
+                .stars {
+                    color: $yellow-400;
+                }
+            }
+
+            .comment {
+                margin-top: 0.5rem;
+                color: $gray-600;
+            }
+
+            .date {
+                margin-top: 0.5rem;
+                color: $gray-500;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+            }
+        }
+    }
+}

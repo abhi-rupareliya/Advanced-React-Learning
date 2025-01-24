@@ -9,6 +9,7 @@ import CryptoJS from "crypto-js";
 import { StateType } from "../../types/storeType";
 import { LoginFormType } from "../../types/FormDataTypes";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "./auth.module.scss";
 
 function Login() {
   const dispatch = useDispatch();
@@ -36,9 +37,9 @@ function Login() {
   };
 
   return (
-    <div className="h-[100vh] w-[100vw] flex justify-center items-center">
-      <div className="w-1/3 p-8 bg-white rounded-lg border shadow-lg">
-        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+    <div className={styles.component_wrapper}>
+      <div className={styles.component_main}>
+        <h2 className={styles.component_heading}>Login</h2>
         <Formik
           initialValues={{
             email: "",
@@ -59,9 +60,9 @@ function Login() {
             <Button type="submit" width="full" text="Login" />
           </Form>
         </Formik>
-        <div className="mt-5 pl-1">
+        <div className={styles.linkContainer}>
           <Link
-            className="text-blue-600 hover:underline "
+            className={styles.link}
             replace={true}
             to="/auth/signup"
           >

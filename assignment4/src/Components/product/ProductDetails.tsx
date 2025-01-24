@@ -4,6 +4,7 @@ import { Product } from "../../types/productType";
 import Image from "../Ui/Image";
 import Loading from "../Ui/Loading";
 import ImageModal from "../Ui/ImageModal";
+import styles from "./productDetail.module.scss";
 
 const ProductPage = () => {
   const [product, setProduct] = useState({} as Product);
@@ -28,7 +29,7 @@ const ProductPage = () => {
   }, []);
 
   function handleImageClick(e: MouseEvent<HTMLImageElement>) {
-    const img = e.target as HTMLImageElement; 
+    const img = e.target as HTMLImageElement;
     setCurrentImage(img.src);
     setIsModalOpen(true);
   }
@@ -46,74 +47,58 @@ const ProductPage = () => {
         isOpen={isModalOpen}
         closeModal={CloseModal}
       />
-      <div className="container mx-auto p-6">
+      <div className={styles.container}>
         {/* Product Hero Section */}
-        <div className="flex flex-wrap lg:flex-row items-start">
-          <div className="lg:w-1/2 w-full mb-6 lg:mb-0 flex justify-center">
+        <div className={styles.hero}>
+          <div className={styles.thumbnail_container}>
             <img
               src={product.thumbnail}
               alt={product.title}
-              className=" w-1/2 h-1/2 rounded-lg shadow-md"
+              className={styles.thumbnail}
             />
           </div>
 
-          <div className="lg:w-1/2 w-full">
-            <h1 className="text-3xl font-semibold text-gray-900">
-              {product.title}
-            </h1>
-            <p className="mt-2 text-gray-600">{product.category}</p>
-            <p className="mt-4 text-lg">{product.description}</p>
-            <div className="mt-6">
-              <span className="text-xl font-semibold text-green-600">
-                ${product.price}
-              </span>
-              <span className="ml-4 text-sm line-through text-gray-500">
+          <div className={styles.heroDetailsContainer}>
+            <h1 className={styles.title}>{product.title}</h1>
+            <p className={styles.category}>{product.category}</p>
+            <p className={styles.description}>{product.description}</p>
+            <div className={styles.amount}>
+              <span className={styles.price}>${product.price}</span>
+              <span className={styles.discountedPrice}>
                 $
                 {(
                   product.price *
                   (100 / (100 - product.discountPercentage))
                 ).toFixed(2)}
               </span>
-              <span className="ml-2 text-sm text-red-500">
+              <span className={styles.discount}>
                 {product.discountPercentage}% OFF
               </span>
             </div>
-            <p className="mt-4 text-gray-600">Brand: {product.brand}</p>
-            <p className="mt-2 text-gray-600">SKU: {product.sku}</p>
-            <p className="mt-2 text-gray-600">
+            <p className={styles.meta}>Brand: {product.brand}</p>
+            <p className={styles.meta}>SKU: {product.sku}</p>
+            <p className={styles.meta}>
               Availability: {product.availabilityStatus}
             </p>
 
             {/* Rating */}
-            <div className="mt-4 flex items-center">
-              <span className="text-yellow-400">
+            <div className={styles.rating}>
+              <span className={styles.star}>
                 {"★".repeat(Math.floor(product.rating))}
                 {"☆".repeat(5 - Math.floor(product.rating))}
               </span>
-              <span className="ml-2 text-gray-500">
+              <span className={styles.number}>
                 ({product.rating?.toFixed(1)})
               </span>
-            </div>
-
-            {/* Buttons */}
-            <div className="mt-6 flex space-x-4">
-              <button className="bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600">
-                Add to Cart
-              </button>
-              <button className="border py-2 px-4 rounded-md text-blue-500 hover:bg-gray-100">
-                View Details
-              </button>
             </div>
           </div>
         </div>
 
         {/* Product Images */}
-        <div className="mt-10">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Product Images
-          </h2>
+        <div className={styles.images}>
+          <h2 className={styles.heading}>Product Images</h2>
 
-          <div className="flex flex-wrap mt-4 w-fit mx-auto gap-20">
+          <div className={styles.container}>
             {product.images?.map((img, index) => (
               <Image
                 key={index}
@@ -126,62 +111,50 @@ const ProductPage = () => {
         </div>
 
         {/* Product Details Section */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className={styles.details}>
           <div>
-            <h3 className="text-xl font-semibold text-gray-900">Dimensions</h3>
-            <p className="mt-2 text-gray-600">
-              Width: {product.dimensions?.width} cm
-            </p>
-            <p className="mt-1 text-gray-600">
+            <h3 className={styles.heading}>Dimensions</h3>
+            <p className={styles.info}>Width: {product.dimensions?.width} cm</p>
+            <p className={styles.info}>
               Height: {product.dimensions?.height} cm
             </p>
-            <p className="mt-1 text-gray-600">
-              Depth: {product.dimensions?.depth} cm
-            </p>
+            <p className={styles.info}>Depth: {product.dimensions?.depth} cm</p>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold text-gray-900">
-              Shipping & Warranty
-            </h3>
-            <p className="mt-2 text-gray-600">
+            <h3 className={styles.heading}>Shipping & Warranty</h3>
+            <p className={styles.info}>
               Shipping Info: {product.shippingInformation}
             </p>
-            <p className="mt-1 text-gray-600">
+            <p className={styles.info}>
               Warranty: {product.warrantyInformation}
             </p>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold text-gray-900">
-              Return Policy
-            </h3>
-            <p className="mt-2 text-gray-600">
-              Return Policy: {product.returnPolicy}
-            </p>
+            <h3 className={styles.heading}>Return Policy</h3>
+            <p className={styles.info}>Return Policy: {product.returnPolicy}</p>
           </div>
         </div>
 
         {/* Reviews Section */}
-        <div className="mt-10">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Customer Reviews
-          </h2>
-          <div className="mt-4 space-y-6">
+        <div className={styles.reviews}>
+          <h2 className={styles.heading}>Customer Reviews</h2>
+          <div className={styles.reviewContainer}>
             {product.reviews?.map((review, index) => (
               <div
                 key={index}
-                className="p-4 border border-gray-300 rounded-lg"
+                className={styles.review}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold">{review.reviewerName}</span>
-                  <span className="text-yellow-400">
+                <div className={styles.rating}>
+                  <span className={styles.customer}>{review.reviewerName}</span>
+                  <span className={styles.stars}>
                     {"★".repeat(Math.floor(review.rating))}
                     {"☆".repeat(5 - Math.floor(review.rating))}
                   </span>
                 </div>
-                <p className="mt-2 text-gray-600">{review.comment}</p>
-                <p className="mt-2 text-sm text-gray-500">
+                <p className={styles.comment}>{review.comment}</p>
+                <p className={styles.date}>
                   Reviewed on: {new Date(review.date).toLocaleDateString()}
                 </p>
               </div>

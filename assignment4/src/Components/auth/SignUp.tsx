@@ -9,6 +9,8 @@ import { User } from "../../types/userType";
 import { SignupFormType } from "../../types/FormDataTypes";
 import { StateType } from "../../types/storeType";
 import { Link } from "react-router-dom";
+import styles from "./auth.module.scss";
+
 const Signup = () => {
   const dispatch = useDispatch();
   const users = useSelector((state: StateType) => state.user.users);
@@ -35,9 +37,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="h-[100vh] w-[100vw] flex justify-center items-center">
-      <div className="w-1/3 max-w-lg mx-auto p-8 bg-white rounded-lg border">
-        <h2 className="text-2xl font-semibold text-center mb-6">Signup</h2>
+    <div className={styles.component_wrapper}>
+      <div className={styles.component_main}>
+        <h2 className={styles.component_heading}>Signup</h2>
         <Formik
           initialValues={{
             firstName: "",
@@ -89,9 +91,9 @@ const Signup = () => {
             <Button type="submit" width="full" text="Create Account" />
           </Form>
         </Formik>
-        <div className="mt-5 pl-1">
+        <div className={styles.linkContainer}>
           <Link
-            className="text-blue-600 hover:underline "
+            className={styles.link}
             replace={true}
             to="/auth/login"
           >

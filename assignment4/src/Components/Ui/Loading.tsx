@@ -1,9 +1,11 @@
+import styles from "./ui.module.scss";
+
 const Loading = () => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center backdrop-blur-sm">
-      <div className="bg-white p-8 rounded-lg shadow-lg text-center flex flex-col items-center space-y-4">
-        <div className="w-16 h-16 border-4 border-t-blue-600 border-l-blue-600 rounded-full animate-spin"></div>
-        <p className="text-xl font-semibold text-gray-700">Please wait...</p>
+    <div className={styles.loader_bg}>
+      <div className={styles.loader_container}>
+        <div className={styles.loader_spinner}></div>
+        <p className={styles.loader_text}>Please wait...</p>
       </div>
     </div>
   );

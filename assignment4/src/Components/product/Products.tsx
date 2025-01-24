@@ -4,8 +4,7 @@ import ReactPaginate from "react-paginate";
 import ProductCard from "./ProductCard";
 import { Product } from "../../types/productType";
 import Loading from "../Ui/Loading";
-
-
+import styles from "./product.module.scss";
 
 const Products = () => {
   const [params, setParams] = useSearchParams();
@@ -36,18 +35,18 @@ const Products = () => {
     setParams({ skip: (selected * limit).toString(), limit: limit.toString() });
   };
 
-  if(!products.length) return <Loading/>
+  if (!products.length) return <Loading />;
 
   return (
-    <div className="max-w-full mx-auto">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  max-w-fit gap-6 p-6 mx-auto border rounded mt-4">
+    <div className={styles.products}>
+      <div className={styles.cardContainer}>
         {products.map((product, index) => (
           <ProductCard key={index} product={product} />
         ))}
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center mt-6">
+      <div className={styles.pagination}>
         <ReactPaginate
           breakLabel="..."
           nextLabel="next"
@@ -56,13 +55,13 @@ const Products = () => {
           pageCount={Math.ceil(totalProducts / limit)}
           forcePage={Math.ceil(skip / limit)}
           previousLabel="previous"
-          containerClassName="flex items-center space-x-2"
-          pageClassName="px-4 py-2 border rounded-md text-gray-700 hover:bg-blue-100"
-          activeClassName="bg-blue-500 text-white"
-          previousClassName="px-4 py-2 border rounded-md text-gray-700 hover:bg-blue-100"
-          nextClassName="px-4 py-2 border rounded-md text-gray-700 hover:bg-blue-100"
-          disabledClassName="text-gray-400 cursor-not-allowed"
-          breakClassName="px-4 py-2 text-gray-700"
+          containerClassName={styles.container}
+          pageClassName={styles.page}
+          activeClassName={styles.page_active}
+          previousClassName={styles.prev}
+          nextClassName={styles.next}
+          disabledClassName={styles.disabled}
+          breakClassName={styles.break}
         />
       </div>
     </div>

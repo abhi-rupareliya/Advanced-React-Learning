@@ -7,6 +7,7 @@ import { editProfile } from "../../Redux/userSlice";
 import { StateType } from "../../types/storeType";
 import { EditProfileFormType } from "../../types/FormDataTypes";
 import { useNavigate } from "react-router-dom";
+import styles from "./auth.module.scss";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -26,40 +27,47 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-8 bg-white rounded-lg border">
-      <h2 className="text-2xl font-semibold text-center mb-6">Edit Profile</h2>
-      <Formik
-        initialValues={{
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          mobileNumber: user.mobileNumber,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <Input
-            name="firstName"
-            id="firstName"
-            lable="First Name"
-            type="text"
-          />
+    <div className={styles.component_wrapper}>
+      <div className={styles.component_main}>
+        <h2 className={styles.component_heading}>Edit Profile</h2>
+        <Formik
+          initialValues={{
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            mobileNumber: user.mobileNumber,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Input
+              name="firstName"
+              id="firstName"
+              lable="First Name"
+              type="text"
+            />
 
-          <Input name="lastName" id="lastName" lable="Last Name" type="text" />
+            <Input
+              name="lastName"
+              id="lastName"
+              lable="Last Name"
+              type="text"
+            />
 
-          <Input name="email" id="email" lable="Email" type="email" />
+            <Input name="email" id="email" lable="Email" type="email" />
 
-          <Input
-            name="mobileNumber"
-            id="mobileNumber"
-            lable="Mobile Number"
-            type="text"
-          />
+            <Input
+              name="mobileNumber"
+              id="mobileNumber"
+              lable="Mobile Number"
+              type="text"
+            />
 
-          <Button type="submit" width="full" text="Save Changes" />
-        </Form>
-      </Formik>
+            <Button type="submit" width="full" text="Save Changes" />
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { StateType } from "../../types/storeType";
 import { ChangePasswordFormType } from "../../types/FormDataTypes";
+import styles from "./auth.module.scss";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -41,43 +42,43 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-8 bg-white rounded-lg border">
-      <h2 className="text-2xl font-semibold text-center mb-6">
-        Change Password
-      </h2>
-      <Formik
-        initialValues={{
-          currentPassword: "",
-          newPassword: "",
-          confirmPassword: "",
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <Input
-            name="currentPassword"
-            id="currentPassword"
-            lable="currentPassword"
-            type="password"
-          />
+    <div className={styles.component_wrapper}>
+      <div className={styles.component_main}>
+        <h2 className={styles.component_heading}>Change Password</h2>
+        <Formik
+          initialValues={{
+            currentPassword: "",
+            newPassword: "",
+            confirmPassword: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Input
+              name="currentPassword"
+              id="currentPassword"
+              lable="currentPassword"
+              type="password"
+            />
 
-          <Input
-            name="newPassword"
-            id="newPassword"
-            lable="New Password"
-            type="password"
-          />
-          <Input
-            name="confirmPassword"
-            id="confirmPassword"
-            lable="Confirm Password"
-            type="password"
-          />
+            <Input
+              name="newPassword"
+              id="newPassword"
+              lable="New Password"
+              type="password"
+            />
+            <Input
+              name="confirmPassword"
+              id="confirmPassword"
+              lable="Confirm Password"
+              type="password"
+            />
 
-          <Button type="submit" width="fit-content" text="Submit" />
-        </Form>
-      </Formik>
+            <Button type="submit" width="full" text="Submit" />
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };
